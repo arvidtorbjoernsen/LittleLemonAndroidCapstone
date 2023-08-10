@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LittleLemonAndroidCapstone</string>
+    <string name="catch_frase">"Let's get to know you"</string>
+    <string name="title">Little Lemon</string>
+    <string name="location">Chicago</string>
+    <string name="description">We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</string>
+    <string name="order_button_text">Order Take Away</string>
+    <string name="weekly_special">Weekly Special</string>
+    <string name="logo_app">Logo App</string>
+</resources>
