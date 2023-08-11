@@ -1,5 +1,6 @@
 package com.example.littlelemonandroidcapstone.presentation.screen.profile
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -39,6 +42,17 @@ fun ProfileScreen(
     navController: NavHostController,
     profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(true) {
+        profileViewModel.readOnBoardingState()
+    }
+    val firstName = profileViewModel.userFirstName.collectAsState().value
+    val lastName = profileViewModel.userLastName.collectAsState().value
+    val email = profileViewModel.userEmail.collectAsState().value
+
+    Log.d("State", "First Name: $firstName")
+    Log.d("State", "Last Name: $lastName")
+    Log.d("State", "Email: $email")
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -81,7 +95,7 @@ fun ProfileScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp, vertical = 10.dp),
-                text = "firstName.value",
+                text = firstName,
                 label = "First name",
                 onTextChange = {}
             )
@@ -90,7 +104,7 @@ fun ProfileScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp, vertical = 10.dp),
-                text = "lastName.value",
+                text = lastName,
                 label = "Last name",
                 onTextChange = {}
             )
@@ -99,7 +113,7 @@ fun ProfileScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp, vertical = 10.dp),
-                text = "email.value",
+                text = email,
                 label = "Email",
                 onTextChange = {}
             )
@@ -109,7 +123,12 @@ fun ProfileScreen(
             onClick = {
                 navController.popBackStack()
                 navController.navigate(Graph.ROOT)
-                profileViewModel.removeOnBoardingState(isCompleted = false)
+                profileViewModel.removeOnBoardingState(
+                    isCompleted = false,
+                    userFirstName = "",
+                    userLastName = "",
+                    userEmail = ""
+                )
             },
             modifier = Modifier
                 .padding(top = 16.dp, bottom = 30.dp)

@@ -28,7 +28,6 @@ fun LittleLemonAndroidCapstoneTheme(
 
     MaterialTheme(
         colors = colors,
-        typography = TypographyStyle,
         shapes = Shapes,
         content = content,
     )

@@ -1,7 +1,7 @@
 package com.example.littlelemonandroidcapstone.di
 
 import android.content.Context
-import com.example.littlelemonandroidcapstone.data.repository.OnBoardingOperationImpl
+import com.example.littlelemonandroidcapstone.data.repository.OnBoardingOperationsImpl
 import com.example.littlelemonandroidcapstone.data.repository.Repository
 import com.example.littlelemonandroidcapstone.domain.repository.OnBoardingOperations
 import com.example.littlelemonandroidcapstone.domain.usecase.UseCases
@@ -9,6 +9,7 @@ import com.example.littlelemonandroidcapstone.domain.usecase.getallmenuitems.Get
 import com.example.littlelemonandroidcapstone.domain.usecase.readonboarding.ReadOnBoardingUseCase
 import com.example.littlelemonandroidcapstone.domain.usecase.removeonboarding.RemoveOnboardingUseCase
 import com.example.littlelemonandroidcapstone.domain.usecase.saveonboarding.SaveOnBoardingUseCase
+import com.example.littlelemonandroidcapstone.domain.usecase.saveproductusecase.InsertProductsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,7 +24,7 @@ object RepositoryModule {
     @Singleton
     fun provideDataStoreOperation(
         @ApplicationContext context: Context
-    ): OnBoardingOperations = OnBoardingOperationImpl(context = context)
+    ): OnBoardingOperations = OnBoardingOperationsImpl(context = context)
 
     @Provides
     @Singleton
@@ -33,7 +34,7 @@ object RepositoryModule {
             removeOnboardingUseCase = RemoveOnboardingUseCase(repository),
             readOnBoardingUseCase = ReadOnBoardingUseCase(repository),
             getAllMenuItemUseCase = GetAllMenuItemUseCase(repository),
-//            searchProductUseCase = SearchProductUseCase(repository)
+            insertProductsUseCase = InsertProductsUseCase(repository)
         )
     }
 }

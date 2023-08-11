@@ -13,9 +13,21 @@ class OnBoardingViewModel @Inject constructor(
     private val useCases: UseCases
 ) : ViewModel() {
 
-    fun saveOnBoardingState(isCompleted: Boolean) {
+    fun saveOnBoardingState(
+        isCompleted: Boolean,
+        userFirstName: String,
+        userLastName: String,
+        userEmail: String
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            useCases.saveOnBoardingUseCase.invoke(isCompleted = isCompleted)
+            useCases.saveOnBoardingUseCase.invoke(
+                isCompleted = isCompleted,
+                userFirstName = userFirstName,
+                userLastName = userLastName,
+                userEmail = userEmail
+            )
         }
     }
+
+
 }

@@ -1,9 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     id("org.jetbrains.kotlin.plugin.serialization")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -110,6 +110,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
     implementation("io.coil-kt:coil-compose:2.4.0")
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }

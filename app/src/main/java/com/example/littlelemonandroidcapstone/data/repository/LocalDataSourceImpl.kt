@@ -9,9 +9,7 @@ class LocalDataSourceImpl(menuItemDatabase: MenuItemDatabase) : LocalDataSource 
 
     private val menuItemDao = menuItemDatabase.menuItemDao()
 
-//    override suspend fun insertMenuItem(products: List<MenuItem>) = menuItemDao.insertMenuItems(menuItems)
-
     override fun getAllMenuItems(): Flow<List<MenuItem>> = menuItemDao.getAllMenuItems()
-
-//    override fun searchMenuItem(query: String): Flow<List<MenuItem>> = menuItemDao.searchMenuItems(query)
+    override suspend fun insertMenuItems(menuItems: List<MenuItem>) =
+        menuItemDao.insertMenuItems(menuItems)
 }

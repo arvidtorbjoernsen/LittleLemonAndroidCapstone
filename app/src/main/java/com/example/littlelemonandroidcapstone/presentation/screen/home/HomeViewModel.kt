@@ -14,9 +14,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val useCases: UseCases
+    private val useCases: UseCases,
 ) : ViewModel() {
-    private val _searchQuery = mutableStateOf("")
+    private var _searchQuery = mutableStateOf("")
     val searchQuery = _searchQuery
 
     private val _menuItemList = MutableStateFlow<List<MenuItem>>(emptyList())
@@ -28,5 +28,9 @@ class HomeViewModel @Inject constructor(
                 _menuItemList.value = value
             }
         }
+    }
+
+    fun onSearchQueryChange(value: String) {
+        _searchQuery.value = value
     }
 }

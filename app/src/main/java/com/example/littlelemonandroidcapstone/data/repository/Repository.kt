@@ -1,6 +1,7 @@
 package com.example.littlelemonandroidcapstone.data.repository
 
 import com.example.littlelemonandroidcapstone.domain.model.MenuItem
+import com.example.littlelemonandroidcapstone.domain.model.UserPreferences
 import com.example.littlelemonandroidcapstone.domain.repository.LocalDataSource
 import com.example.littlelemonandroidcapstone.domain.repository.OnBoardingOperations
 import kotlinx.coroutines.Dispatchers
@@ -13,16 +14,41 @@ class Repository @Inject constructor(
     private val localDataSource: LocalDataSource
 ) {
 
-    suspend fun saveOnBoardingState(isCompleted: Boolean) {
-        dataStore.saveOnBoardingState(isCompleted = isCompleted)
+    suspend fun saveOnBoardingState(
+        isCompleted: Boolean,
+        userFirstName: String,
+        userLastName: String,
+        userEmail: String
+    ) {
+        dataStore.saveOnBoardingState(
+            isCompleted = isCompleted,
+            userFirstName = userFirstName,
+            userLastName = userLastName,
+            userEmail = userEmail
+        )
     }
 
-    suspend fun removeOnBoardingState(isCompleted: Boolean) {
-        dataStore.removeOnBoardingState(isCompleted = isCompleted)
+    suspend fun removeOnBoardingState(
+        isCompleted: Boolean,
+        userFirstName: String,
+        userLastName: String,
+        userEmail: String
+    ) {
+        dataStore.removeOnBoardingState(
+            isCompleted = isCompleted,
+            userFirstName = userFirstName,
+            userLastName = userLastName,
+            userEmail = userEmail
+        )
+
     }
 
-    fun readOnBoardingState(): Flow<Boolean> = dataStore.readOnBoardingState()
+    fun readOnBoardingState(): Flow<UserPreferences> = dataStore.readOnBoardingState()
 
     fun getAllMenuItems(): Flow<List<MenuItem>> =
         localDataSource.getAllMenuItems().flowOn(Dispatchers.IO)
+
+    suspend fun insertMenuItems(menuItems: List<MenuItem>) {
+        localDataSource.insertMenuItems(menuItems)
+    }
 }

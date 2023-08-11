@@ -3,6 +3,7 @@ package com.example.littlelemonandroidcapstone.presentation.screen.splash
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.littlelemonandroidcapstone.domain.usecase.UseCases
+import com.example.littlelemonandroidcapstone.util.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,8 +22,12 @@ class SplashViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
+            useCases.insertProductsUseCase.invoke(Network.getMenuItemsFromNetwork())
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
             _onBoardingIsCompleted.value =
-                useCases.readOnBoardingUseCase().stateIn(viewModelScope).value
+                useCases.readOnBoardingUseCase().stateIn(viewModelScope).value.isCompleted
         }
     }
 
