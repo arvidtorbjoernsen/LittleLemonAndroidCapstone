@@ -27,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,11 +43,9 @@ import java.util.Locale
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier,
     navController: NavHostController,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
-    val mContext = LocalContext.current
     val searchQuery by homeViewModel.searchQuery
     val menuItemList by homeViewModel.menItemList.collectAsState()
 
@@ -104,7 +101,10 @@ fun HomeScreen(
                     )
                 }
             }
-            Hero(searchQuery = searchQuery, onSearchPhraseChange = {})
+            Hero(
+                searchQuery = searchQuery,
+                viewModel = homeViewModel
+            )
             Column(
                 modifier = Modifier
                     .padding(10.dp)
@@ -152,6 +152,7 @@ fun HomeScreen(
                                 }
                             )
                         }
+
                     }
                 }
                 MenuItems(menuItemList.filter { menuItem ->

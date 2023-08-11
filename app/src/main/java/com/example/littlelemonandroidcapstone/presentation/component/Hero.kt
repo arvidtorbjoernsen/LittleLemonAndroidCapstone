@@ -15,7 +15,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
@@ -23,10 +22,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -36,19 +37,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.littlelemonandroidcapstone.R
+import com.example.littlelemonandroidcapstone.presentation.screen.home.HomeViewModel
 import com.example.littlelemonandroidcapstone.ui.theme.Charcoal
 import com.example.littlelemonandroidcapstone.ui.theme.Cloud
 import com.example.littlelemonandroidcapstone.ui.theme.Green
 import com.example.littlelemonandroidcapstone.ui.theme.KarlaFont
 import com.example.littlelemonandroidcapstone.ui.theme.MarkaziFont
-import com.example.littlelemonandroidcapstone.ui.theme.Red
 import com.example.littlelemonandroidcapstone.ui.theme.Yellow
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun Hero(
     searchQuery: String,
-    onSearchPhraseChange: (String) -> Unit
+    viewModel: HomeViewModel
 ) {
+
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     Column(
         modifier = Modifier.background(Green),
     ) {
@@ -109,8 +114,8 @@ fun Hero(
                     .fillMaxWidth()
                     .offset(y = (-20).dp),
                 value = searchQuery,
-                label = { Text("Enter search phrase")},
-                onValueChange =  onSearchPhraseChange,
+                label = { Text("Enter search phrase") },
+                onValueChange = viewModel::onSearchQueryChange,
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Search,
@@ -124,13 +129,14 @@ fun Hero(
                     imeAction = ImeAction.Done,
                 ),
                 keyboardActions = KeyboardActions(onDone = {
+                    keyboardController?.hide()
                 }),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     backgroundColor = Color.White,
                     textColor = Charcoal,
                     unfocusedBorderColor = Charcoal,
                     focusedBorderColor = Charcoal,
-                    focusedLabelColor= Color.Blue,
+                    focusedLabelColor = Color.Blue,
                     unfocusedLabelColor = Charcoal,
                 ),
             )
@@ -141,5 +147,6 @@ fun Hero(
 @Preview(showBackground = true)
 @Composable
 fun HeroPreview() {
-    Hero(searchQuery = "", onSearchPhraseChange = {})
+
+
 }
