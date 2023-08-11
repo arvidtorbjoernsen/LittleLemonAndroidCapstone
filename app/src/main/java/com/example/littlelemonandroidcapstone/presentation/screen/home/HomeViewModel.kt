@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val useCases: UseCases
+    private val useCases: UseCases,
 ) : ViewModel() {
     private val _searchQuery = mutableStateOf("")
     val searchQuery = _searchQuery

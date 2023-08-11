@@ -2,7 +2,6 @@ package com.example.littlelemonandroidcapstone.presentation.component
 
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
@@ -41,8 +40,10 @@ fun CustomTextInput(
         onValueChange = onTextChange,
         colors = TextFieldDefaults.outlinedTextFieldColors(
             textColor = Charcoal,
-            unfocusedBorderColor = MaterialTheme.colors.secondary,
-            unfocusedLabelColor = MaterialTheme.colors.secondary,
+            focusedBorderColor= Charcoal,
+            focusedLabelColor= Charcoal,
+            unfocusedBorderColor = Charcoal,
+            unfocusedLabelColor = Charcoal,
         ),
         textStyle = TextStyle.Default.copy(fontSize = 20.sp, fontFamily = KarlaFont),
         maxLines = maxLine,

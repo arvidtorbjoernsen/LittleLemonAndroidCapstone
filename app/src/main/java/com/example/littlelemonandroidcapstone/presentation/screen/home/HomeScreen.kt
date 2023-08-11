@@ -52,6 +52,21 @@ fun HomeScreen(
     val searchQuery by homeViewModel.searchQuery
     val menuItemList by homeViewModel.menItemList.collectAsState()
 
+    val categoriesSet = remember {
+        mutableStateOf<Set<String>>(emptySet())
+    }
+
+    val categories = remember {
+        mutableListOf("all")
+    }
+
+    categoriesSet.value = menuItemList.map { it.category }.toSet()
+
+    categories.addAll(categoriesSet.value)
+
+
+    val selectedCategory = remember { mutableStateOf("") }
+
     Scaffold { padding ->
         Column(
             modifier = Modifier
@@ -95,23 +110,6 @@ fun HomeScreen(
                     .padding(10.dp)
                     .clip(RoundedCornerShape(10.dp))
             ) {
-
-
-                val categoriesSet = remember {
-                    mutableStateOf<Set<String>>(emptySet())
-                }
-
-                val categories = remember {
-                    mutableListOf("all")
-                }
-
-                categoriesSet.value = menuItemList.map { it.category }.toSet()
-
-                categories.addAll(categoriesSet.value)
-
-
-                val selectedCategory = remember { mutableStateOf("") }
-
                 LazyRow {
                     items(categories) { category ->
                         Button(

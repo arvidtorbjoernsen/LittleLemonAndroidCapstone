@@ -7,7 +7,17 @@ class SaveOnBoardingUseCase(
     private val repository: Repository
 ) {
 
-    suspend operator fun invoke(isCompleted: Boolean) {
-        repository.saveOnBoardingState(isCompleted = isCompleted)
+    suspend operator fun invoke(
+        isCompleted: Boolean,
+        userFirstName: String,
+        userLastName: String,
+        userEmail: String
+    ) {
+        repository.saveOnBoardingState(
+            isCompleted = isCompleted,
+            userFirstName = userFirstName,
+            userLastName = userLastName,
+            userEmail = userEmail
+        )
     }
 }

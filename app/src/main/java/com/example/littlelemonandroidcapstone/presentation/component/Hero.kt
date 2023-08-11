@@ -41,6 +41,7 @@ import com.example.littlelemonandroidcapstone.ui.theme.Cloud
 import com.example.littlelemonandroidcapstone.ui.theme.Green
 import com.example.littlelemonandroidcapstone.ui.theme.KarlaFont
 import com.example.littlelemonandroidcapstone.ui.theme.MarkaziFont
+import com.example.littlelemonandroidcapstone.ui.theme.Red
 import com.example.littlelemonandroidcapstone.ui.theme.Yellow
 
 @Composable
@@ -108,7 +109,8 @@ fun Hero(
                     .fillMaxWidth()
                     .offset(y = (-20).dp),
                 value = searchQuery,
-                onValueChange = { onSearchPhraseChange },
+                label = { Text("Enter search phrase")},
+                onValueChange =  onSearchPhraseChange,
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Search,
@@ -126,8 +128,10 @@ fun Hero(
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     backgroundColor = Color.White,
                     textColor = Charcoal,
-                    unfocusedBorderColor = MaterialTheme.colors.secondary,
-                    unfocusedLabelColor = MaterialTheme.colors.secondary,
+                    unfocusedBorderColor = Charcoal,
+                    focusedBorderColor = Charcoal,
+                    focusedLabelColor= Color.Blue,
+                    unfocusedLabelColor = Charcoal,
                 ),
             )
         }

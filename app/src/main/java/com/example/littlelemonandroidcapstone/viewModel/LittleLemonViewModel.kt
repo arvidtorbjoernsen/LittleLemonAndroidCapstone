@@ -57,28 +57,5 @@
 //    }
 //
 //
-//    private val _menuItemList = MutableStateFlow<List<MenuItem>>(emptyList())
-//    val menuItemList = _menuItemList.asStateFlow()
-//
-//    init {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            repository.getAllMenuItems().distinctUntilChanged()
-//                .collect { listOfMenuItems ->
-//                    if (listOfMenuItems.isEmpty()) {
-//                        Log.d("Empty", ": Empty list")
-//                        val menuItemsNetwork = fetchMenu()
-//                        val menuItemsRoom = menuItemsNetwork.map { it.toMenuItemRoom() }
-//                        _menuItemList.value = menuItemsRoom
-//                        Log.d("Empty", menuItemsNetwork.toString())
-//                    } else {
-//                        _menuItemList.value = listOfMenuItems
-//                    }
-//                }
-//        }
-//    }
-//
-////    fun addMenuItem(menuItem: MenuItem) =
-////        viewModelScope.launch { repository.addMenuItem(menuItem) }
-////
-////    fun isEmpty() = viewModelScope.launch { repository.isEmpty() }
+
 //}

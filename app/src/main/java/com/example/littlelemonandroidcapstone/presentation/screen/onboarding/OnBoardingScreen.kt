@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -43,6 +42,7 @@ import com.example.littlelemonandroidcapstone.navigation.graph.Graph
 import com.example.littlelemonandroidcapstone.presentation.component.CustomButton
 import com.example.littlelemonandroidcapstone.presentation.component.CustomTextInput
 import com.example.littlelemonandroidcapstone.ui.theme.Charcoal
+import com.example.littlelemonandroidcapstone.ui.theme.Green
 import com.example.littlelemonandroidcapstone.ui.theme.KarlaFont
 import com.example.littlelemonandroidcapstone.ui.theme.MarkaziFont
 import com.example.littlelemonandroidcapstone.ui.theme.Red
@@ -81,7 +81,12 @@ fun OnBoardingScreen(
             Toast.makeText(context, "Registration successful!", Toast.LENGTH_SHORT).show()
             navController.popBackStack()
             navController.navigate(Graph.MAIN)
-            onBoardingViewModel.saveOnBoardingState(isCompleted = true)
+            onBoardingViewModel.saveOnBoardingState(
+                isCompleted = true,
+                userFirstName = firstName,
+                userLastName = lastName,
+                userEmail = email
+            )
         }
     }
 
@@ -107,7 +112,7 @@ fun OnBoardingScreen(
             modifier = Modifier
                 .height(100.dp)
                 .fillMaxWidth()
-                .background(color = MaterialTheme.colors.primary),
+                .background(color = Green),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
